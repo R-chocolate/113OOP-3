@@ -1,77 +1,66 @@
-public class TicTacToe {
 
-    private char[][] board;  // 3x3 井字盤
-    private int moves;       // 已下的步數
+class TicTacToe {
+
+    private char[][] board;
+    private int moves;
 
     public TicTacToe() {
         board = new char[3][3];
-        moves = 0;
-
-        // 初始化盤面
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                board[i][j] = ' ';  // 空白
+                board[i][j] = ' ';
             }
         }
+        moves = 0;
     }
 
-    // 設定 O 或 X 到某個位置
     public boolean set(int row, int col, char player) {
-        if (player != 'O' && player != 'X') return false;
-        if (row < 0 || row > 2 || col < 0 || col > 2) return false;
-        if (board[row][col] != ' ') return false;
-
+        if (player != 'X' && player != 'O') {
+            return false;
+        }
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            return false;
+        }
+        if (board[row][col] != ' ') {
+            return false;
+        }
         board[row][col] = player;
         moves++;
         return true;
     }
 
-    // 判斷勝負：回傳 O / X / D(平手) / C(繼續)
     public char evaluate() {
-
-        // 判斷橫
+        // Check horizontal
         for (int i = 0; i < 3; i++) {
-            if (board[i][0] != ' ' &&
-                board[i][0] == board[i][1] &&
-                board[i][1] == board[i][2]) 
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
                 return board[i][0];
+            }
         }
 
-        // 判斷直
-        for (int i = 0; i < 3; i++) {
-            if (board[0][i] != ' ' &&
-                board[0][i] == board[1][i] &&
-                board[1][i] == board[2][i])
-                return board[0][i];
+        // Check vertical
+        for (int j = 0; j < 3; j++) {
+            if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != ' ') {
+                return board[0][j];
+            }
         }
 
-        // 判斷斜
-        if (board[0][0] != ' ' &&
-            board[0][0] == board[1][1] &&
-            board[1][1] == board[2][2])
+        // Check diagonal
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ') {
             return board[0][0];
-
-        if (board[0][2] != ' ' &&
-            board[0][2] == board[1][1] &&
-            board[1][1] == board[2][0])
+        }
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ') {
             return board[0][2];
+        }
 
-        // 判斷平手
-        if (moves == 9) return 'D';  // Draw
+        // Check if moves == 9
+        if (moves == 9) {
+            return 'D';
+        }
 
-        // 否則遊戲還沒結束
-        return 'C';  // Continue
+        return 'C';
     }
 
-    // 額外：取得盤面（JUnit 會用）
     public char get(int r, int c) {
         return board[r][c];
     }
 }
-// update comment
-
-
-
-
-
-
