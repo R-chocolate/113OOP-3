@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +42,6 @@ public class TicTacToeTest {
     public void testInvalidMove() {
         TicTacToe t = new TicTacToe();
         t.set(0,0,'O');
-        assertFalse(t.set(0,0,'X')); // 不能再下同一格
+        assertFalse(t.set(0,0,'X'));
     }
 }
